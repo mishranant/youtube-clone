@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<video controls src='<%= rails_blob_path(@post.video)%>' poster='<%= rails_blob_path(@post.image) %>' style='width:auto; height:500px'> </video> 
+
+<div>
+  <% if current_user and @post.user_id == current_user.id %>
+    <%= link_to "Edit this post", edit_post_path(@post), class: 'mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium' %> |
+    <%= button_to "Destroy this post", @post, method: :delete %>
+  <% end %>
+  <%= link_to "Back to posts", posts_path, class: 'mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium' %>
+  <% if @post.video.attached? %>
+    <%= link_to "Download", download_post_path(@post), class: 'mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium' %>
+    <%= time_ago_in_words(@post.created_at) %> ago
+  <% end %>
+
+</div>
